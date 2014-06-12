@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,9 +38,7 @@ public class MainActivity extends ActionBarActivity {
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
 		
-	
-				
-				
+		
 				
 			}
 		
@@ -101,15 +100,22 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	
+	/* 
+	 * WORKS!
+	 * displays a dialog box when SEND button is clicked */
 	
-	// does not work!
-	
-	public void AttachDialogBox(View view){
+	public void DialogBox(View view){
 		
-
+		DialogFragment d = new AttachmentDialog();
+		//d.setTitle("Dialog Test");
+		TextView tv = new TextView(this);
+		tv.setText("Success");
+		//d.setContentView(tv);
+		d.show(getSupportFragmentManager(), "dialog box test");
 		
-		//DialogFragment ad = new AttachmentDialog();
-		//ad.show(getSupportFragmentManager(), "missiles");
+		
 	}
+	
+
 
 }

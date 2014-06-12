@@ -11,6 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 
+
+	/** 
+	 * Class for the new activity!
+	 * @author 0904843m
+	 *
+	 */
 public class DisplayAttachmentBox extends ActionBarActivity {
 
 	@Override

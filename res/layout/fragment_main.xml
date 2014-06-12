@@ -80,6 +80,7 @@
         android:layout_alignBottom="@+id/btn_attach"
         android:layout_alignRight="@+id/email_address"
         android:text="@string/btn_send"
-        android:textStyle="bold" />
+        android:textStyle="bold" 
+        android:onClick="DialogBox"/>
 
 </RelativeLayout>
