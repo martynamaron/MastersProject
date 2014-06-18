@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
     <resources>
-        <string-array
+        <array
             name="folders_array">
-            <item>Bilogy</item>
-            <item>Chemistry</item>
-            <item>Physics</item>
-        </string-array>
+            
+            <item>@drawable/biology_pdf  </item>
+            <item>@drawable/chemistry_pdf  </item>
+            <item>@drawable/physics_pdf  </item>
+        </array>
     </resources>
 

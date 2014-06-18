@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="11"
         android:targetSdkVersion="16" />
 
     <application
@@ -23,9 +23,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.obstructiveinterfaces.DisplayAttachmentBox"
-            android:label="@string/title_activity_display_attachment_box"
-            android:parentActivityName="com.example.obstructiveinterfaces.MainActivity" >
+            android:name="com.example.obstructiveinterfaces.ObstructiveActivity"
+            android:label="@string/title_activity_obstructive"
+            android:parentActivityName="com.example.obstructiveinterfaces.MainActivity" 
+            android:theme="@android:style/Theme.Holo.Dialog"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.obstructiveinterfaces.MainActivity" />
@@ -33,3 +35,4 @@
     </application>
 
 </manifest>
+

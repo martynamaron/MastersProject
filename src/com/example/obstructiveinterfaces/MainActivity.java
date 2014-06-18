@@ -5,8 +5,10 @@ package com.example.obstructiveinterfaces;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,9 +19,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements AttachmentDialog.AttachmentDialogListener, SendMessage1.SendMessageListener {
 
 	int obstructionType;
 	Button attachBTN;
@@ -86,23 +90,27 @@ public class MainActivity extends ActionBarActivity {
 		}
 	}
 	
-	/* called when Attach button is pressed 
-	 * New Activity! */
+	/* called when SEND button is pressed 
+	 * New Activity! 
+	 * WORKS ! */
 	
-	public void AttachBox(View view){
-		Intent intent = new Intent(this, DisplayAttachmentBox.class);
-		EditText editText = (EditText) findViewById(R.id.email_body);
-		String message = editText.getText().toString();
-		intent.putExtra(EXTRA_MESSAGE, message);
+public void ActivitySendMsg(View view){
+	
+	
+	Intent intent = new Intent(this, ObstructiveActivity.class);
 		
-		startActivity(intent);
+	startActivity(intent);
 
-	}
+}
+
+//what to do when the YES button is clicked on the dialog Activity SEND
+
+
 	
 	
 	/* 
 	 * WORKS!
-	 * displays a dialog box when SEND button is clicked */
+	 * displays a dialog box when ATTACH button is clicked */
 	
 	public void DialogBox(View view){
 		
@@ -116,6 +124,59 @@ public class MainActivity extends ActionBarActivity {
 		
 	}
 	
+	
+	// making the attachments visible
+	  @Override
+	    public void onDialogPositiveClick(DialogFragment dialog) {
+	        // User touched the dialog's positive button
+		  
+		  TextView attachment = (TextView) findViewById(R.id.AttachmentText);
+		  attachment.setVisibility(0);
+		  
+		  ImageView clippy = (ImageView) findViewById(R.id.AttachmentClip);
+		  clippy.setVisibility(0);
+	      
+	    }
+
+
+	
+	public void SendMessage(View view){
+		
+		DialogFragment d = new SendMessage1();
+		TextView tv = new TextView(this);
+		tv.setText("Success");
+		//d.setContentView(tv);
+		d.show(getSupportFragmentManager(), "send message 1 test");
+		
+	}
+	
+
+	// making the attachments visible
+	  @Override
+	    public void onDialogPositiveClick2(DialogFragment dialog) {
+	        // User touched the dialog's positive button
+		  
+		  TextView attachment = (TextView) findViewById(R.id.AttachmentText);
+		  attachment.setVisibility(0);
+		  
+		  ImageView clippy = (ImageView) findViewById(R.id.AttachmentClip);
+		  clippy.setVisibility(0);
+	      
+	    }
+
+	    @Override
+	    public void onDialogNegativeClick(DialogFragment dialog) {
+	        // User touched the dialog's negative button
+	    	//do nothing
+	        
+	    }
+
+
+
+
+	
+	
+
 
 
 }
