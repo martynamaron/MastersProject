@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${packageName}.${activityClass}" >
+
+    <Button
+        android:id="@+id/BTNobstruction_message_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/BTNobstruction_message_yes"
+        android:layout_alignBottom="@+id/BTNobstruction_message_yes"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="59dp"
+        android:text="@string/no" />
+
+    <TextView
+        android:id="@+id/obstruction_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="22dp"
+        android:gravity="center_horizontal"
+        android:text="@string/obstruction_message"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/BTNobstruction_message_yes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/BTN_why"
+        android:layout_marginLeft="30dp"
+        android:text="@string/yes" />
+
+    <Button
+        android:id="@+id/BTN_why"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/obstruction_message"
+        android:layout_marginLeft="41dp"
+        android:layout_marginTop="28dp"
+        android:layout_toRightOf="@+id/BTNobstruction_message_yes"
+        android:text="why?" />
+
+</RelativeLayout>
