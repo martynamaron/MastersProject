@@ -9,10 +9,38 @@
     <string name="btn_send">Send</string>
     <string name="btn_eaddress">To:</string>
     <string name="btn_esubject">Subject:</string>
+    <string name="attachment">dissertation draft.docx</string>
+    <string name="reattaching">PG dissertation draft.docx</string>
+    
     <string name="title_activity_display_attachment_box">DisplayAttachmentBox</string>
     <string name="obstruction_message">Are you sure you want to send this email?</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
-    <string name="title_activity_obstructive">Send?</string>
+    
+    <string name="info_dialog_msg">The subject of your email reads: &quot; Latest dissertation update &quot;, 
+        but you have attached a file last updated in December 2012.</string>
+    <string name="are_you_sure"> Are you sure you want to proceed?</string>
+    
+    <string name="title_activity_information">InformationActivity</string>
+    
+    <string name="title_activity_positive_response">New Message</string>
+    <string name="supervisor_email">Timothy.Storer@gla.ac.uk</string>
+    <string name="res_subjectmsg">RE: Dissertation draft</string>
+    <string name="pos_res_emailBody">Hi there, \n\n
+        The draft looks fantastic! \n
+        Well done, keep up the good work.
+        
+        \n\n
+        Thanks,\n
+        Tim</string>
+    <string name="title_activity_negative_response">NegativeResponse</string>
+    <string name="neg_res_emailBody">Hi there, \n\n
+        I think you have attached the wrong file. \n
+        Please send me your actual dissertation draft.
+        
+        \n\n
+        Thanks,\n
+        Tim
+</string>
 
 </resources>

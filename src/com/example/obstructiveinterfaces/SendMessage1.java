@@ -15,8 +15,8 @@ import android.support.v4.app.DialogFragment;
 public class SendMessage1 extends DialogFragment{
 	
 	 public interface SendMessageListener {
-	        public void onDialogPositiveClick2(DialogFragment dialog);
-	        public void onDialogNegativeClick(DialogFragment dialog);
+	        public void onSendPositiveClick(DialogFragment dialog);
+	        public void onSendNegativeClick(DialogFragment dialog);
 			
 	    }
 	 
@@ -52,13 +52,13 @@ public class SendMessage1 extends DialogFragment{
 
                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
-                	   SMlistener.onDialogPositiveClick2(SendMessage1.this);
+                	   SMlistener.onSendPositiveClick(SendMessage1.this);
 
                    }
                })
                .setNegativeButton("No", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
-                	   SMlistener.onDialogNegativeClick(SendMessage1.this);
+                	   SMlistener.onSendNegativeClick(SendMessage1.this);
                    }
                });
         

@@ -4,16 +4,6 @@
     android:layout_height="match_parent"
     tools:context="${packageName}.${activityClass}" >
 
-    <Button
-        android:id="@+id/BTNobstruction_message_no"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/BTNobstruction_message_yes"
-        android:layout_alignBottom="@+id/BTNobstruction_message_yes"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="59dp"
-        android:text="@string/no" />
-
     <TextView
         android:id="@+id/obstruction_message"
         android:layout_width="wrap_content"
@@ -39,9 +29,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/obstruction_message"
-        android:layout_marginLeft="41dp"
-        android:layout_marginTop="28dp"
-        android:layout_toRightOf="@+id/BTNobstruction_message_yes"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
         android:text="why?" />
+
+    <Button
+        android:id="@+id/BTNobstruction_message_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/BTNobstruction_message_yes"
+        android:layout_alignBottom="@+id/BTNobstruction_message_yes"
+        android:layout_marginLeft="32dp"
+        android:layout_toRightOf="@+id/BTN_why"
+        android:text="@string/no" />
 
 </RelativeLayout>

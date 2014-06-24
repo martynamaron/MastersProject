@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
     <resources>
-        <array
-            name="folders_array">
+        <string-array
+            name="attachments_array">
             
-            <item>@drawable/biology_pdf  </item>
-            <item>@drawable/chemistry_pdf  </item>
-            <item>@drawable/physics_pdf  </item>
-        </array>
+            <item>Dissertation_FINAL.pdf</item>
+            <item>dissertation draft.docx</item>
+            <item>Test_Results.xls</item>
+            <item>SAMPLE project layout.doc</item>
+        </string-array>
+        
+         <string-array
+            name="reattaching_array">
+            
+            <item>Ethics Approval Request.docx</item>
+            <item>SAMPLE project layout.doc</item>
+            <item>all the reading.pdf</item>
+            <item>PG dissertation draft.docx</item>
+        </string-array>
+        
+        
     </resources>
 

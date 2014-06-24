@@ -17,8 +17,8 @@ public class AttachmentDialog extends DialogFragment{
 	
 	
 	 public interface AttachmentDialogListener {
-	        public void onDialogPositiveClick(DialogFragment dialog);
-	        public void onDialogNegativeClick(DialogFragment dialog);
+	        public void onAttachmentPositiveClick(DialogFragment dialog);
+	        public void onAttachmentNegativeClick(DialogFragment dialog);
 	    }
 
 	 AttachmentDialogListener mListener;
@@ -44,24 +44,18 @@ public class AttachmentDialog extends DialogFragment{
         // Use the Builder class for convenient dialog construction
 		
 		final ArrayList  mSelectedItems = new ArrayList();  // Where we track the selected items
-				
-				
-		
-		//retrieves the biology.pdf pic from the typedArray - the first item of that array
-				Resources res = getResources();
-				TypedArray folders = res.obtainTypedArray(R.array.folders_array);
-				Drawable drawable = folders.getDrawable(0);
+
 		
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
        // .setMessage("Message")
-        builder.setTitle("Science > Exams > 2014")
+        builder.setTitle("Dissertations > UnderGrad")
         
         	
         
         	   //.setIcon(drawable)  //sets the title icon
         	   
         	   	//setting the folder multi-check list
-        	   .setMultiChoiceItems(R.array.folders_array, null, new DialogInterface.OnMultiChoiceClickListener(){
+        	   .setMultiChoiceItems(R.array.attachments_array, null, new DialogInterface.OnMultiChoiceClickListener(){
 
         		  
 				@Override
@@ -84,13 +78,13 @@ public class AttachmentDialog extends DialogFragment{
         	   })
                .setPositiveButton("Attach File", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
-                	   mListener.onDialogPositiveClick(AttachmentDialog.this);
+                	   mListener.onAttachmentPositiveClick(AttachmentDialog.this);
 
                    }
                })
                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
-                	   mListener.onDialogNegativeClick(AttachmentDialog.this);
+                	   mListener.onAttachmentNegativeClick(AttachmentDialog.this);
                    }
                });
         // Create the AlertDialog object and return it

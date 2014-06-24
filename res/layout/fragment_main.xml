@@ -84,28 +84,40 @@
         android:text="@string/btn_attach"
         android:textColor="#ffffff" />
 
+    <TextView
+        android:id="@+id/Attachment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/AttachmentClip"
+        android:layout_toRightOf="@+id/AttachmentClip"
+        android:clickable="true"
+        android:onClick="DialogBox"
+        android:paddingBottom="12dp"
+        android:paddingLeft="10dp"
+        android:text="@string/attachment"
+        android:textSize="20dp"
+        android:visibility="invisible" />
+
     <ImageView
         android:id="@+id/AttachmentClip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/email_address"
-        android:layout_toLeftOf="@+id/AttachmentText"
         android:src="@drawable/clippy" 
-        android:visibility="invisible"
-        />
+        android:visibility="invisible"/>
 
     <TextView
-        android:id="@+id/AttachmentText"
+        android:id="@+id/ReattachingFile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/email_address"
-        android:layout_marginRight="18dp"
-        android:layout_toLeftOf="@+id/btn_send"
-        android:paddingLeft="10dp"
-        android:text="Biology.pdf"
-        android:textSize="20dp" 
-        android:visibility="invisible"
+        android:layout_alignTop="@+id/AttachmentClip"
+        android:layout_toRightOf="@+id/AttachmentClip"
+        android:clickable="true"
         android:onClick="DialogBox"
-        />
+        android:paddingBottom="12dp"
+        android:paddingLeft="10dp"
+        android:text="@string/reattaching"
+        android:textSize="20dp"
+        android:visibility="invisible" />
 
 </RelativeLayout>

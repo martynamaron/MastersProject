@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="16"
         android:targetSdkVersion="16" />
 
     <application
@@ -24,15 +24,29 @@
         </activity>
         <activity
             android:name="com.example.obstructiveinterfaces.ObstructiveActivity"
-            android:label="@string/title_activity_obstructive"
-            android:parentActivityName="com.example.obstructiveinterfaces.MainActivity" 
-            android:theme="@android:style/Theme.Holo.Dialog"
-            >
+            android:parentActivityName="com.example.obstructiveinterfaces.MainActivity"
+            android:theme="@android:style/Theme.Holo.Light.Dialog" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.obstructiveinterfaces.MainActivity" />
         </activity>
+        <activity
+            android:name="com.example.obstructiveinterfaces.InformationActivity"
+            android:label="@string/title_activity_information"
+            android:parentActivityName="com.example.obstructiveinterfaces.ObstructiveActivity"
+            android:theme="@android:style/Theme.Holo.Light.Dialog" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.obstructiveinterfaces.ObstructiveActivity" />
+        </activity>
+        <activity
+            android:name="com.example.obstructiveinterfaces.PositiveResponse"
+            android:label="@string/title_activity_positive_response" >
+        </activity>
+        <activity
+            android:name="com.example.obstructiveinterfaces.NegativeResponse"
+            android:label="@string/title_activity_negative_response" >
+        </activity>
     </application>
 
 </manifest>
-
