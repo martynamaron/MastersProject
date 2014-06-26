@@ -120,4 +120,15 @@
         android:textSize="20dp"
         android:visibility="invisible" />
 
+    <Button
+        android:id="@+id/initialise"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_send"
+        android:layout_centerHorizontal="true"
+        android:onClick="InitialDialog"
+        android:text="@string/initialise"
+        android:textSize="12sp" />
+
 </RelativeLayout>

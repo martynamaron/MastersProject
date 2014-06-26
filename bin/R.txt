@@ -252,6 +252,7 @@ int id BTN_why 0x7f050047
 int id BTNobstruction_message_no 0x7f050048
 int id BTNobstruction_message_yes 0x7f050046
 int id ReattachingFile 0x7f050054
+int id RelativeLayout1 0x7f050056
 int id action_bar 0x7f05001c
 int id action_bar_activity_content 0x7f050015
 int id action_bar_container 0x7f05001b
@@ -263,7 +264,7 @@ int id action_context_bar 0x7f05001d
 int id action_menu_divider 0x7f050016
 int id action_menu_presenter 0x7f050017
 int id action_mode_close_button 0x7f050024
-int id action_settings 0x7f050055
+int id action_settings 0x7f05005d
 int id activity_chooser_view_content 0x7f050025
 int id always 0x7f05000b
 int id areYouSure 0x7f05003e
@@ -292,6 +293,8 @@ int id image 0x7f050027
 int id info_msg 0x7f05003d
 int id info_no 0x7f05003f
 int id info_yes 0x7f050040
+int id initialise 0x7f050055
+int id input_partNo 0x7f050058
 int id listMode 0x7f050001
 int id list_item 0x7f050029
 int id middle 0x7f050012
@@ -302,7 +305,12 @@ int id negative_msg 0x7f050044
 int id never 0x7f050009
 int id none 0x7f050010
 int id normal 0x7f050000
+int id obstruction_A 0x7f05005a
+int id obstruction_B 0x7f05005b
+int id obstruction_C 0x7f05005c
 int id obstruction_message 0x7f050045
+int id obstruction_types 0x7f050059
+int id participant_no 0x7f050057
 int id pos_res_from 0x7f050049
 int id pos_res_subject 0x7f05004b
 int id pos_res_supervisor_email 0x7f05004a
@@ -364,7 +372,8 @@ int layout activity_negative_response 0x7f03001b
 int layout activity_obstructive 0x7f03001c
 int layout activity_positive_response 0x7f03001d
 int layout fragment_main 0x7f03001e
-int layout support_simple_spinner_dropdown_item 0x7f03001f
+int layout initial_dialog 0x7f03001f
+int layout support_simple_spinner_dropdown_item 0x7f030020
 int menu display_attachment_box 0x7f0d0000
 int menu main 0x7f0d0001
 int menu obstructive 0x7f0d0002
@@ -392,8 +401,10 @@ int string btn_send 0x7f0a0012
 int string compose_email 0x7f0a0010
 int string hello_world 0x7f0a000e
 int string info_dialog_msg 0x7f0a001b
+int string initialise 0x7f0a0025
 int string neg_res_emailBody 0x7f0a0023
 int string no 0x7f0a001a
+int string obs_types 0x7f0a0024
 int string obstruction_message 0x7f0a0018
 int string pos_res_emailBody 0x7f0a0021
 int string reattaching 0x7f0a0016

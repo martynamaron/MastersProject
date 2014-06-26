@@ -42,5 +42,7 @@
         Thanks,\n
         Tim
 </string>
+<string name="obs_types">Obstruction Types:</string>
+<string name="initialise">Initialise</string>
 
 </resources>

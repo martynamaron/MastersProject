@@ -1099,6 +1099,7 @@ containing a value of this type.
         public static final int BTNobstruction_message_no=0x7f050048;
         public static final int BTNobstruction_message_yes=0x7f050046;
         public static final int ReattachingFile=0x7f050054;
+        public static final int RelativeLayout1=0x7f050056;
         public static final int action_bar=0x7f05001c;
         public static final int action_bar_activity_content=0x7f050015;
         public static final int action_bar_container=0x7f05001b;
@@ -1110,7 +1111,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050055;
+        public static final int action_settings=0x7f05005d;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int areYouSure=0x7f05003e;
@@ -1139,6 +1140,8 @@ containing a value of this type.
         public static final int info_msg=0x7f05003d;
         public static final int info_no=0x7f05003f;
         public static final int info_yes=0x7f050040;
+        public static final int initialise=0x7f050055;
+        public static final int input_partNo=0x7f050058;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
         public static final int middle=0x7f050012;
@@ -1149,7 +1152,12 @@ containing a value of this type.
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
+        public static final int obstruction_A=0x7f05005a;
+        public static final int obstruction_B=0x7f05005b;
+        public static final int obstruction_C=0x7f05005c;
         public static final int obstruction_message=0x7f050045;
+        public static final int obstruction_types=0x7f050059;
+        public static final int participant_no=0x7f050057;
         public static final int pos_res_from=0x7f050049;
         public static final int pos_res_subject=0x7f05004b;
         public static final int pos_res_supervisor_email=0x7f05004a;
@@ -1237,7 +1245,8 @@ containing a value of this type.
         public static final int activity_obstructive=0x7f03001c;
         public static final int activity_positive_response=0x7f03001d;
         public static final int fragment_main=0x7f03001e;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001f;
+        public static final int initial_dialog=0x7f03001f;
+        public static final int support_simple_spinner_dropdown_item=0x7f030020;
     }
     public static final class menu {
         public static final int display_attachment_box=0x7f0d0000;
@@ -1296,8 +1305,10 @@ containing a value of this type.
         public static final int compose_email=0x7f0a0010;
         public static final int hello_world=0x7f0a000e;
         public static final int info_dialog_msg=0x7f0a001b;
+        public static final int initialise=0x7f0a0025;
         public static final int neg_res_emailBody=0x7f0a0023;
         public static final int no=0x7f0a001a;
+        public static final int obs_types=0x7f0a0024;
         public static final int obstruction_message=0x7f0a0018;
         public static final int pos_res_emailBody=0x7f0a0021;
         public static final int reattaching=0x7f0a0016;

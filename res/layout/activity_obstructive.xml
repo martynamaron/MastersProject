@@ -22,7 +22,9 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/BTN_why"
         android:layout_marginLeft="30dp"
-        android:text="@string/yes" />
+        android:text="@string/yes"
+        
+        />
 
     <Button
         android:id="@+id/BTN_why"
@@ -31,7 +33,7 @@
         android:layout_below="@+id/obstruction_message"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
-        android:text="why?" />
+        android:text="Why?" />
 
     <Button
         android:id="@+id/BTNobstruction_message_no"

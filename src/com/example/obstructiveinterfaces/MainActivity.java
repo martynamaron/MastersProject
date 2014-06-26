@@ -2,6 +2,13 @@ package com.example.obstructiveinterfaces;
 
 
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -30,28 +37,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity implements AttachmentDialog.AttachmentDialogListener, 
-ReattachingDialog.ReattachingDialogListener, 
-/*SendMessage1.SendMessageListener,*/ InformationDialog.InformationDialogListener {
+ReattachingDialog.ReattachingDialogListener, InitialDialog.InitialDialogListener
+/*SendMessage1.SendMessageListener,*/  {
 
-	int obstructionType;
-	Button attachBTN;
-	Button sendBTN;
+	Button attachBTN, sendBTN;
 	TextView display;
-	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+	String UserTracking = "ParticipantFile";
+	String obstructionType, ParticipantNO;
+	
 	boolean firstAttach, reattach;
+	
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		
+		
+		
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
 		
 		
-				
 			}
 		
 	
@@ -80,8 +90,10 @@ ReattachingDialog.ReattachingDialogListener,
 	 * A placeholder fragment containing a simple view.
 	 */
 	public static class PlaceholderFragment extends Fragment {
+		
 
 		public PlaceholderFragment() {
+			
 		}
 
 
@@ -91,11 +103,23 @@ ReattachingDialog.ReattachingDialogListener,
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_main, container,
 					false);
-			return rootView;
 						
+			return rootView;
+			
+		
 		}
+		
+		
 	}
 	
+	
+	public void InitialDialog (View view){
+		
+		DialogFragment initDial = new InitialDialog();
+		TextView tv = new TextView(this);
+		tv.setText("initial");
+		initDial.show(getSupportFragmentManager(), "initial box");
+	}
 	
 	
 	/* 
@@ -144,6 +168,7 @@ ReattachingDialog.ReattachingDialogListener,
 		  clippy.setVisibility(0);
 		  
 		  firstAttach = true;
+		  createFile();
 	      
 	    }
 	  
@@ -180,43 +205,7 @@ ReattachingDialog.ReattachingDialogListener,
 			// TODO Auto-generated method stub
 			
 		}
-	  
-	  
 
-/** this code instantiates a SendMessage1 dialog box
- * it is not used at the moment
- */
-	
-//	public void SendMessage(View view){
-//		
-//		DialogFragment d = new SendMessage1();
-//		TextView tv = new TextView(this);
-//		tv.setText("Success");
-//		//d.setContentView(tv);
-//		d.show(getSupportFragmentManager(), "send message 1 test");
-//		
-//	}
-//	
-//
-//	// clicking the Obstructive Send box buttons
-//	  @Override
-//	    public void onSendPositiveClick(DialogFragment dialog) {
-//	        // User touched the dialog's positive button
-//		  
-//		 
-//	      
-//	    }
-//
-//	    @Override
-//	    public void onSendNegativeClick(DialogFragment dialog) {
-//	        // User touched the dialog's negative button
-//	    	//do nothing
-//	    	
-//	    	
-//	        
-//	    }
-	    
-/** end of unused code */
 	    
 	  
 	    
@@ -235,6 +224,8 @@ ReattachingDialog.ReattachingDialogListener,
 			Intent intent = new Intent(this, ObstructiveActivity.class);
 			
 			startActivity(intent);
+			
+  
 		}
 		
 		else // reattach = true
@@ -291,35 +282,51 @@ ReattachingDialog.ReattachingDialogListener,
 	//what to do when the YES button is clicked on the dialog Activity SEND
 
 	
-	    // instantiates the informationDialog
-	    
-		public void InfoDialog(View view){
-			
-			DialogFragment infD = new InformationDialog();
-			TextView tv = new TextView(this);
-			tv.setText("Success");
-			//d.setContentView(tv);
-			infD.show(getSupportFragmentManager(), "info dialog test");
-			
-		}
 
-		 // clicking the Information box buttons
+	public void createFile() {
+		
+		// create a file for tracking each participant
+		
+		try { 
+		       // catches IOException below
+		       final String TESTSTRING = new String("Hello Android");
 
-			@Override
-			public void onInformationPositiveClick(DialogFragment dialog) {
-				// TODO Auto-generated method stub
-				
-			}
+		       /* We have to use the openFileOutput()-method
+		       * the ActivityContext provides, to
+		       * protect your file from others and
+		       * This is done for security-reasons.
+		       * We chose MODE_WORLD_READABLE, because
+		       *  we have nothing to hide in our file */             
+		       FileOutputStream fOut = openFileOutput("samplefile.txt", MODE_WORLD_READABLE);
+		       OutputStreamWriter osw = new OutputStreamWriter(fOut); 
+		       		
+		       
+		       System.out.print("File created");
+		       
+		       // Write the string to the file
+		       osw.write(TESTSTRING);
+
+		       /* ensure that everything is
+		        * really written out and close */
+		       osw.flush();
+		       osw.close();
 
 
 
-			@Override
-			public void onInformationNegativeClick(DialogFragment dialog) {
-				// TODO Auto-generated method stub
-				
-			}
-	
-	
+		    } catch (IOException ioe) 
+		      {ioe.printStackTrace();}
+	}
+
+
+	// what happens when you click the 'Continue to App' button
+	@Override
+	public void InitialDialogClick(DialogFragment dialog) {
+		Button initialise = (Button) findViewById(R.id.initialise);
+		initialise.setVisibility(4);
+		
+		//http://developer.android.com/guide/topics/ui/controls/radiobutton.html
+		
+	}
 
 
 

@@ -1,5 +1,8 @@
 package com.example.obstructiveinterfaces;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.DialogFragment;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,20 +23,29 @@ import android.widget.Toast;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NotificationCompat;
+;
 
 public class ObstructiveActivity extends Activity {
 	
-boolean firstSend;
-boolean InfoViewed;
+private boolean firstSend, InfoViewed;
+
+private Handler handler;
+private Button yesBTN, noBTN, whyBTN;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_obstructive);
 		
-		Button yesBTN = (Button) findViewById(R.id.BTNobstruction_message_yes);
-		Button noBTN = (Button) findViewById(R.id.BTNobstruction_message_no);
-		Button whyBTN = (Button) findViewById(R.id.BTN_why);
+		yesBTN = (Button) findViewById(R.id.BTNobstruction_message_yes);
+		noBTN = (Button) findViewById(R.id.BTNobstruction_message_no);
+		whyBTN = (Button) findViewById(R.id.BTN_why);
+		
+		// button initially set to false
+		yesBTN.setEnabled(false);
+		
+		handler = new Handler();
 		
 		
 		/** negative notification  
@@ -75,24 +88,21 @@ Bitmap largeNotificationIcon = BitmapFactory.decodeResource(getResources(), R.dr
 		 * negative notification
 		 */
 
-
-
 		
-		
-		//yesBTN.setEnabled(false);
 
 		// if the user proceeds to send the message
 		yesBTN.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-    			// toast, that the message has been sent!
+            	
+            	// toast, that the message has been sent!
     			
     			Context context = getApplicationContext();
     			SendToast newToast = new SendToast();
     			
     			newToast.createToast(context);
             	
-            	finish(); // close the dialog box
+            	
+    			finish(); // close the dialog box
             	//System.exit(0); // close the app, with a delay!!!
             	
             	 firstSend = true;
@@ -117,13 +127,6 @@ Bitmap largeNotificationIcon = BitmapFactory.decodeResource(getResources(), R.dr
 		whyBTN.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	
-            	Context context = getApplicationContext();
-            	CharSequence text = "User clicked WHY?!";
-            	int duration = Toast.LENGTH_SHORT;
-
-            	Toast toast = Toast.makeText(context, text, duration);
-            	toast.show();
-            	
             	// starts a new activity in a form of a dialog box
             	ActivityInfoBox(v);
             	
@@ -133,7 +136,8 @@ Bitmap largeNotificationIcon = BitmapFactory.decodeResource(getResources(), R.dr
             }
         });
 		
-		
+		// starts a thread which enables the YES button after 5 seconds
+		new Thread(new Task()).start();
 
 	}
 	
@@ -146,8 +150,33 @@ Bitmap largeNotificationIcon = BitmapFactory.decodeResource(getResources(), R.dr
 
 	}
 	
-
 	
+	// the delay thread defined an vibration
+
+	class Task implements Runnable {
+			    @Override
+		        public void run() {
+			           
+			         
+			                try {
+		                    Thread.sleep(4000);
+			                } catch (InterruptedException e) {
+			                    e.printStackTrace();
+			                }
+			                
+			               handler.post(new Runnable() {
+			                @Override
+			                public void run() {
+			                	yesBTN.setEnabled(true);
+			                	
+			                 }
+			               });
+			            
+			        }
+			 
+			    }
+
+	// end of delay thread
 
 }
 

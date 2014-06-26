@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/participant_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
+        android:text="Participant Number:"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/input_partNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/participant_no"
+        android:layout_alignBottom="@+id/participant_no"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@+id/participant_no"
+        android:ems="3"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/obstruction_types"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/participant_no"
+        android:layout_below="@+id/input_partNo"
+        android:layout_marginTop="16dp"
+        android:text="@string/obs_types"
+        android:textSize="18sp" />
+
+    <RadioButton
+        android:id="@+id/obstruction_A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/participant_no"
+        android:layout_below="@+id/obstruction_types"
+        android:text="A" />
+
+    <RadioButton
+        android:id="@+id/obstruction_B"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/participant_no"
+        android:layout_below="@+id/obstruction_A"
+        android:text="B" />
+
+    <RadioButton
+        android:id="@+id/obstruction_C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/participant_no"
+        android:layout_below="@+id/obstruction_B"
+        android:text="C" />
+
+</RelativeLayout>
