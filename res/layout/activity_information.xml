@@ -8,33 +8,13 @@
         android:id="@+id/info_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
         android:gravity="center_horizontal"
         android:padding="12dp"
         android:text="@string/info_dialog_msg"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/areYouSure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/info_msg"
-        android:padding="12dp"
-        android:text="@string/are_you_sure"
-        android:textSize="18sp" />
-
-    <Button
-        android:id="@+id/info_no"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/info_yes"
-        android:layout_alignBottom="@+id/info_yes"
-        android:layout_alignRight="@+id/areYouSure"
-        android:layout_marginRight="40dp"
-        android:text="@string/no" />
+        android:textSize="22sp" />
 
     <Button
         android:id="@+id/info_yes"
@@ -44,6 +24,31 @@
         android:layout_below="@+id/areYouSure"
         android:layout_marginLeft="39dp"
         android:layout_marginTop="17dp"
-        android:text="@string/yes" />
+        android:padding="5dp"
+        android:text="@string/yes"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/info_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/info_yes"
+        android:layout_alignBottom="@+id/info_yes"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@+id/areYouSure"
+        android:padding="2dp"
+        android:text="@string/no"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/areYouSure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info_msg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:padding="12dp"
+        android:text="@string/are_you_sure"
+        android:textSize="20sp" />
 
 </RelativeLayout>

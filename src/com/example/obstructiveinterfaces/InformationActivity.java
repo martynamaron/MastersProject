@@ -112,12 +112,6 @@ public class InformationActivity extends Activity {
 	}
 
 	
-	public void NegativeResponseMSG(View view){
-		
-		
-		//Intent intent = new Intent(this, NegativeResponse.class);
-		int requestCode = 2;	
-		//startActivityForResult(intent, requestCode);
-	}
+
 	
 }

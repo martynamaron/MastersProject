@@ -12,44 +12,45 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="18dp"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="58dp"
         android:text="From:"
-        android:textSize="16sp" />
-
-    <EditText
-        android:id="@+id/pos_res_supervisor_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/pos_res_from"
-        android:layout_below="@+id/pos_res_from"
-        android:ems="13" 
-        android:text="@string/supervisor_email">
-
-        <requestFocus />
-    </EditText>
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/pos_res_subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/pos_res_supervisor_email"
+        android:layout_alignLeft="@+id/pos_res_from"
         android:layout_below="@+id/pos_res_supervisor_email"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="@string/res_subjectmsg"
         android:textColor="#000"
-        android:textSize="18sp" />
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/positive_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/pos_res_subject"
-        android:layout_alignRight="@+id/pos_res_supervisor_email"
         android:layout_below="@+id/pos_res_subject"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="41dp"
         android:background="#fff"
-        android:minLines="15"
+        android:maxEms="25"
+        android:minEms="22"
+        android:minLines="19"
         android:text="@string/pos_res_emailBody"
-        android:textSize="16sp" />
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/pos_res_supervisor_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/pos_res_from"
+        android:layout_marginLeft="25dp"
+        android:layout_toRightOf="@+id/pos_res_from"
+        android:ems="13"
+        android:text="@string/supervisor_email"
+        android:textColor="#000"
+        android:textSize="22sp" />
 
 </RelativeLayout>

@@ -1,9 +1,5 @@
 package com.example.obstructiveinterfaces;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -13,7 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
+import android.os.Handler;
 import android.support.v4.app.DialogFragment;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,11 +22,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NotificationCompat;
 ;
 
-public class ObstructiveActivity extends Activity {
+public class ObstructiveActivity2 extends Activity {
 	
 private boolean  InfoViewed;
+
+private Handler handler;
 private Button yesBTN, noBTN, whyBTN;
-private String PartNUMBER;
 
 
 
@@ -38,15 +35,17 @@ private String PartNUMBER;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_obstructive);
+		setContentView(R.layout.activity_obstructive_activity2);
 		
-		yesBTN = (Button) findViewById(R.id.BTNobstruction_message_yes);
-		noBTN = (Button) findViewById(R.id.BTNobstruction_message_no);
-		whyBTN = (Button) findViewById(R.id.BTN_why);
-
-		//read the participant number
-		Bundle bundle = getIntent().getExtras();
-		PartNUMBER = bundle.getString("Participant Number");
+		yesBTN = (Button) findViewById(R.id.BTNobstruction_message_yes2);
+		noBTN = (Button) findViewById(R.id.BTNobstruction_message_no2);
+		whyBTN = (Button) findViewById(R.id.BTN_why2);
+		
+		// button initially set to false
+		yesBTN.setEnabled(false);
+		
+		handler = new Handler();
+		
 		
 		/** negative notification  
 		 * 
@@ -132,13 +131,12 @@ Bitmap largeNotificationIcon = BitmapFactory.decodeResource(getResources(), R.dr
             	
             	InfoViewed = true;
             	
-            	
-            	saveInFile();
-            	
             	finish();
             }
         });
-
+		
+		// starts a thread which enables the YES button after 5 seconds
+		new Thread(new Task()).start();
 
 	}
 	
@@ -151,30 +149,34 @@ Bitmap largeNotificationIcon = BitmapFactory.decodeResource(getResources(), R.dr
 
 	}
 	
-	public void saveInFile(){
-		
-		String sFileName = "Results"+PartNUMBER+".txt";
-		try {
-			
-			File root = new File(Environment.getExternalStorageDirectory(), "Notes");
-			File gpxfile = new File(root, sFileName);
-			FileWriter writer = new FileWriter(gpxfile);
-	        writer.append("The information dialog has been opened");
-	        writer.flush();
-	        writer.close();
-	        Toast.makeText(this, "INFO Saved", Toast.LENGTH_SHORT).show();
-			
-		}
-		
-	    catch(IOException e)
-	    {
-	         e.printStackTrace();
-	    }
-
-		
-	}
 	
+	// the delay thread defined an vibration
 
+	class Task implements Runnable {
+			    @Override
+		        public void run() {
+			           
+			         
+			                try {
+		                    Thread.sleep(4000);
+		                    
+			                } catch (InterruptedException e) {
+			                    e.printStackTrace();
+			                }
+			                
+			               handler.post(new Runnable() {
+			                @Override
+			                public void run() {
+			                	yesBTN.setEnabled(true);
+			                	
+			                 }
+			               });
+			            
+			        }
+			 
+			    }
+
+	// end of delay thread
 
 }
 

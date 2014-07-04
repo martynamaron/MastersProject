@@ -2,17 +2,15 @@ package com.example.obstructiveinterfaces;
 
 
 
-import java.io.FileOutputStream;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
+import android.text.Editable;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -25,6 +23,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,15 +37,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity implements AttachmentDialog.AttachmentDialogListener, 
-ReattachingDialog.ReattachingDialogListener, InitialDialog.InitialDialogListener
-/*SendMessage1.SendMessageListener,*/  {
+ReattachingDialog.ReattachingDialogListener {
 
 	Button attachBTN, sendBTN;
 	TextView display;
-	String UserTracking = "ParticipantFile";
-	String obstructionType, ParticipantNO;
+	char obstructionType;
+	int obstr;
+	String ParticipantNO="";
+	String returnedResult="";
+	Vibrator v;
+	int i;
+	final static int STATIC_INTEGER_VALUE = 1;
+	protected static final String PUBLIC_STATIC_STRING_IDENTIFIER = "passing the participant number";
 	
-	boolean firstAttach, reattach;
+	boolean firstAttach, reattached, infoViewed;
 	
 	
 	
@@ -60,8 +65,7 @@ ReattachingDialog.ReattachingDialogListener, InitialDialog.InitialDialogListener
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
-		
-		
+				
 			}
 		
 	
@@ -106,19 +110,53 @@ ReattachingDialog.ReattachingDialogListener, InitialDialog.InitialDialogListener
 						
 			return rootView;
 			
-		
+			
 		}
 		
 		
 	}
 	
-	
+	// dialog to type in the participant number and obstruction type
 	public void InitialDialog (View view){
 		
-		DialogFragment initDial = new InitialDialog();
-		TextView tv = new TextView(this);
-		tv.setText("initial");
-		initDial.show(getSupportFragmentManager(), "initial box");
+		Intent intent = new Intent(this, InitialActivity.class);
+		
+		// the initial dialog box will be passing the values back
+		startActivityForResult(intent, STATIC_INTEGER_VALUE );
+		
+		Button BTNinitialise = (Button) findViewById(R.id.initialise);
+		BTNinitialise.setVisibility(4);
+		
+		
+	}
+	
+	//listening for passing the Participant Number and Obstruction Type from InitialActivity
+	// WORKS!!!
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	  super.onActivityResult(requestCode, resultCode, data);
+	  switch(requestCode) {
+	    case (STATIC_INTEGER_VALUE) : {
+	      if (resultCode == Activity.RESULT_OK) {
+	        // TODO Extract the data returned from the child Activity.
+	    	  returnedResult = data.getStringExtra(PUBLIC_STATIC_STRING_IDENTIFIER);
+	    	  
+	    	  //divide the string into the Obstruction type and Participant number
+	    	  obstructionType = returnedResult.charAt(0);
+	    	  
+	    	  ParticipantNO = returnedResult.substring(1,4);
+	    	  
+	    	  TextView tv = (TextView) findViewById(R.id.textView1);
+	    	  tv.setText(""+obstructionType);
+	    	  
+	    	  TextView tv2 = (TextView) findViewById(R.id.textView2);
+	    	  tv2.setText(ParticipantNO);
+	    	  
+	      }
+	      break;
+	    } 
+	  }
 	}
 	
 	
@@ -161,6 +199,8 @@ ReattachingDialog.ReattachingDialogListener, InitialDialog.InitialDialogListener
 	    public void onAttachmentPositiveClick(DialogFragment dialog) {
 	        // User touched the dialog's positive button
 		  
+		  createFile();
+
 		  TextView attachment = (TextView) findViewById(R.id.Attachment);
 		  attachment.setVisibility(0);
 		  
@@ -168,7 +208,6 @@ ReattachingDialog.ReattachingDialogListener, InitialDialog.InitialDialogListener
 		  clippy.setVisibility(0);
 		  
 		  firstAttach = true;
-		  createFile();
 	      
 	    }
 	  
@@ -194,7 +233,7 @@ ReattachingDialog.ReattachingDialogListener, InitialDialog.InitialDialogListener
 		TextView REattachment = (TextView) findViewById(R.id.ReattachingFile);
 		REattachment.setVisibility(0);
 	
-		reattach = true;
+		reattached = true;
 			
 		}
 		
@@ -207,8 +246,6 @@ ReattachingDialog.ReattachingDialogListener, InitialDialog.InitialDialogListener
 		}
 
 	    
-	  
-	    
 		/* called when SEND button is pressed 
 		 * New Activity! in a form of a dialog 
 		 * WORKS ! */
@@ -217,18 +254,50 @@ ReattachingDialog.ReattachingDialogListener, InitialDialog.InitialDialogListener
 		
 		// show the obstructive window only if the attachment is incorrect!
 		// when the attachment has been changed - do nothing, just send
+
 		
 		
-		if (!reattach){
-			
-			Intent intent = new Intent(this, ObstructiveActivity.class);
-			
-			startActivity(intent);
-			
+		if ((!reattached) && obstructionType=='1')
+		{
+						
+			//if obstruction type = 1, display the simple version
+				Intent intent = new Intent(this, ObstructiveActivity.class);
+				
+				
+				//send the participant number with the intent!
+				intent.putExtra("Participant Number", ParticipantNO);
+				
+				startActivity(intent);
+				
+			}
+						
+			else if (!reattached && obstructionType=='2'){
+				//if obstruction type = 2, display the window with the time delay	
+				
+				Intent intent = new Intent(this, ObstructiveActivity2.class);
+				
+				//send the participant number with the intent!
+				intent.putExtra("Participant Number", ParticipantNO);
+				startActivity(intent);
+				
+			}
+						
+				
+			else if (!reattached && obstructionType=='3'){
+			// if obstruction type = 3, display the window with the delay and vibration			
+				Intent intent = new Intent(this, ObstructiveActivity2.class);
+				
+						startActivity(intent);
+						
+						v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+						v.vibrate(4000);
+			}
+
   
-		}
 		
-		else // reattach = true
+		
+		
+		else // reattached = true
 		{
 			// toast, that the message has been sent!
 			
@@ -275,58 +344,58 @@ ReattachingDialog.ReattachingDialogListener, InitialDialog.InitialDialogListener
 		
 		}
 		
-
-
 	}
-
-	//what to do when the YES button is clicked on the dialog Activity SEND
-
 	
-
+	// creates a test file and saves it in the 'Notes' directory 
+	// with the participant's number as a title
 	public void createFile() {
 		
-		// create a file for tracking each participant
 		
-		try { 
-		       // catches IOException below
-		       final String TESTSTRING = new String("Hello Android");
-
-		       /* We have to use the openFileOutput()-method
-		       * the ActivityContext provides, to
-		       * protect your file from others and
-		       * This is done for security-reasons.
-		       * We chose MODE_WORLD_READABLE, because
-		       *  we have nothing to hide in our file */             
-		       FileOutputStream fOut = openFileOutput("samplefile.txt", MODE_WORLD_READABLE);
-		       OutputStreamWriter osw = new OutputStreamWriter(fOut); 
-		       		
-		       
-		       System.out.print("File created");
-		       
-		       // Write the string to the file
-		       osw.write(TESTSTRING);
-
-		       /* ensure that everything is
-		        * really written out and close */
-		       osw.flush();
-		       osw.close();
-
-
-
-		    } catch (IOException ioe) 
-		      {ioe.printStackTrace();}
-	}
-
-
-	// what happens when you click the 'Continue to App' button
-	@Override
-	public void InitialDialogClick(DialogFragment dialog) {
-		Button initialise = (Button) findViewById(R.id.initialise);
-		initialise.setVisibility(4);
+		String sFileName = "Results"+ParticipantNO+".txt";
+		String ParticipantResults;
+		String reattachedSTRING;
 		
-		//http://developer.android.com/guide/topics/ui/controls/radiobutton.html
+		if (reattached){
+			reattachedSTRING = "The attachement was changed and correct message sent";
+		}
+		else{
+			reattachedSTRING= "The wrong attachment has been sent";
+		}
 		
-	}
+		// participant number
+		// obstruction type
+		 
+		ParticipantResults = "Participant Number: " +ParticipantNO+"\n" +
+				"Obstruction Type: " +obstructionType+"\n"+
+				reattachedSTRING 
+				;
+		
+		//proceeded  to send : true
+		// message sent - negative feedback
+		
+		//information box clicked - true
+		
+		// creating the file
+		    try
+		    {
+		        File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+		        if (!root.exists()) {
+		            root.mkdirs();
+		        }
+		        File gpxfile = new File(root, sFileName);
+		        FileWriter writer = new FileWriter(gpxfile);
+		        writer.append(ParticipantResults);
+		        writer.flush();
+		        writer.close();
+		        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+		    }
+		    catch(IOException e)
+		    {
+		         e.printStackTrace();
+		    }
+		   }  
+
+
 
 
 

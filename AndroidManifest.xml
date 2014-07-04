@@ -4,6 +4,9 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="19" />
@@ -24,6 +27,7 @@
         </activity>
         <activity
             android:name="com.example.obstructiveinterfaces.ObstructiveActivity"
+            android:label="@string/send_click"
             android:parentActivityName="com.example.obstructiveinterfaces.MainActivity"
             android:theme="@android:style/Theme.Holo.Light.Dialog" >
             <meta-data
@@ -41,11 +45,22 @@
         </activity>
         <activity
             android:name="com.example.obstructiveinterfaces.PositiveResponse"
-            android:label="@string/title_activity_positive_response" >
+            android:label="@string/title_notification_newMSG" >
         </activity>
         <activity
             android:name="com.example.obstructiveinterfaces.NegativeResponse"
-            android:label="@string/title_activity_negative_response" >
+            android:label="@string/title_notification_newMSG" >
+        </activity>
+        <activity
+            android:name="com.example.obstructiveinterfaces.InitialActivity"
+            android:label="@string/title_activity_initial"
+            android:parentActivityName="com.example.obstructiveinterfaces.MainActivity"
+            android:theme="@android:style/Theme.Holo.Light.Dialog" >
+        </activity>
+        <activity
+            android:name="com.example.obstructiveinterfaces.ObstructiveActivity2"
+            android:label="@string/title_activity_obstructive_activity2"
+            android:theme="@android:style/Theme.Holo.Light.Dialog" >
         </activity>
     </application>
 

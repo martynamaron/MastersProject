@@ -11,114 +11,19 @@
     android:scrollbarAlwaysDrawVerticalTrack="false"
     tools:context="com.example.obstructiveinterfaces.MainActivity$PlaceholderFragment" >
 
-    <!--  attach button -->
+    <!-- attach button -->
 
-    <!--  send button -->
-    
-    <!--  email body text field -->
 
-	   <!-- email subject input line -->
+    <!-- send button -->
 
-		   
 
-    
-     <!--  email address input line -->
+    <!-- email body text field -->
 
-    <EditText
-        android:id="@+id/email_body"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/email_subject"
-        android:layout_alignParentBottom="true"
-        android:background="#ffffff"
-        android:ems="15"
-        android:gravity="top"
-        android:inputType="textMultiLine"
-        android:minLines="12" />
 
-    <EditText
-        android:id="@+id/email_subject"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/email_body"
-        android:layout_alignLeft="@+id/email_address"
-        android:ems="15"
-        android:hint="@string/btn_esubject"
-        android:paddingBottom="15dp"
-        android:textSize="15dp"
-        android:layout_marginBottom="10dp" >
+    <!-- email subject input line -->
 
-        <requestFocus />
-    </EditText>
 
-    <Button
-        android:id="@+id/btn_send"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/email_address"
-        android:onClick="ActivitySendMsg"
-        android:text="@string/btn_send"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/email_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/email_subject"
-        android:layout_alignParentLeft="true"
-        android:ems="15"
-        android:hint="@string/btn_eaddress"
-        android:inputType="textEmailAddress"
-        android:textSize="15dp" />
-
-    <Button
-        android:id="@+id/btn_attach"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:layout_alignBaseline="@+id/btn_send"
-        android:layout_alignBottom="@+id/btn_send"
-        android:layout_alignLeft="@+id/email_address"
-        android:freezesText="true"
-        android:onClick="DialogBox"
-        android:text="@string/btn_attach"
-        android:textColor="#ffffff" />
-
-    <TextView
-        android:id="@+id/Attachment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/AttachmentClip"
-        android:layout_toRightOf="@+id/AttachmentClip"
-        android:clickable="true"
-        android:onClick="DialogBox"
-        android:paddingBottom="12dp"
-        android:paddingLeft="10dp"
-        android:text="@string/attachment"
-        android:textSize="20dp"
-        android:visibility="invisible" />
-
-    <ImageView
-        android:id="@+id/AttachmentClip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/email_address"
-        android:src="@drawable/clippy" 
-        android:visibility="invisible"/>
-
-    <TextView
-        android:id="@+id/ReattachingFile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/AttachmentClip"
-        android:layout_toRightOf="@+id/AttachmentClip"
-        android:clickable="true"
-        android:onClick="DialogBox"
-        android:paddingBottom="12dp"
-        android:paddingLeft="10dp"
-        android:text="@string/reattaching"
-        android:textSize="20dp"
-        android:visibility="invisible" />
+    <!-- email address input line -->
 
     <Button
         android:id="@+id/initialise"
@@ -127,8 +32,127 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_send"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
         android:onClick="InitialDialog"
         android:text="@string/initialise"
         android:textSize="12sp" />
+
+    <EditText
+        android:id="@+id/email_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/initialise"
+        android:layout_marginTop="65dp"
+        android:ems="25"
+        android:hint="@string/btn_eaddress"
+        android:inputType="textEmailAddress"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/email_subject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/email_address"
+        android:layout_below="@+id/email_address"
+        android:layout_marginTop="21dp"
+        android:ems="28"
+        android:hint="@string/btn_esubject"
+        android:paddingBottom="15dp"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/email_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/email_subject"
+        android:layout_alignRight="@+id/email_subject"
+        android:layout_below="@+id/email_subject"
+        android:layout_marginTop="24dp"
+        android:background="#ffffff"
+        android:ems="15"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:minLines="19" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/btn_send"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_alignRight="@+id/email_address"
+        android:layout_marginRight="36dp"
+        android:layout_marginTop="12dp"
+        android:onClick="ActivitySendMsg"
+        android:text="@string/btn_send"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/AttachmentClip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/email_address"
+        android:layout_alignTop="@+id/ReattachingFile"
+        android:layout_marginLeft="14dp"
+        android:src="@drawable/clippy"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/ReattachingFile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btn_attach"
+        android:layout_below="@+id/initialise"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="15dp"
+        android:clickable="true"
+        android:onClick="DialogBox"
+        android:paddingBottom="12dp"
+        android:paddingLeft="10dp"
+        android:text="@string/reattaching"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/Attachment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ReattachingFile"
+        android:layout_alignBottom="@+id/ReattachingFile"
+        android:layout_alignLeft="@+id/ReattachingFile"
+        android:text="@string/attachment"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btn_attach"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_alignTop="@+id/btn_send"
+        android:layout_toRightOf="@+id/AttachmentClip"
+        android:freezesText="true"
+        android:onClick="DialogBox"
+        android:text="@string/btn_attach"
+        android:textColor="#ffffff"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Attachment"
+        android:layout_alignRight="@+id/btn_send"
+        android:layout_marginRight="13dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ReattachingFile"
+        android:layout_alignRight="@+id/textView1"
+        android:text="TextView" />
 
 </RelativeLayout>

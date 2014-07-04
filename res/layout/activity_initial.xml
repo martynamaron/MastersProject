@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${packageName}.${activityClass}" >
+
+    <TextView
+        android:id="@+id/A_part_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/A_obstr_types"
+        android:layout_below="@+id/A_input_obsr"
+        android:layout_marginTop="42dp"
+        android:text="@string/partnum" />
+
+    <TextView
+        android:id="@+id/A_obstr_types"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/obs_types" />
+
+    <EditText
+        android:id="@+id/A_input_obsr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/A_obstr_types"
+        android:layout_alignBottom="@+id/A_obstr_types"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/A_part_no"
+        android:ems="3"
+        android:textSize="12sp" >
+        <requestFocus />
+        
+    </EditText>
+        
+
+    <EditText
+        android:id="@+id/A_input_partnum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/A_part_no"
+        android:layout_alignLeft="@+id/A_input_obsr"
+        android:ems="3"
+        android:textSize="12sp" />
+
+      
+
+    <Button
+        android:id="@+id/initial_continueBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/A_part_no"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:text="Continue"
+        android:textSize="12sp" />
+
+</RelativeLayout>
