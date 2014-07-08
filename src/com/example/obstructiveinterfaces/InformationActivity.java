@@ -1,5 +1,6 @@
 package com.example.obstructiveinterfaces;
 
+
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,6 +10,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,12 +21,73 @@ import android.widget.Toast;
 
 public class InformationActivity extends Activity {
 	
-	private boolean MSGsentFromInfo;
+	private View view;
+	private Handler handler;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_information);
+		
+		handler = new Handler();
+		
+				
+		Button infoYES = (Button) findViewById(R.id.info_yes);
+		Button infoNO = (Button) findViewById(R.id.info_no);
+		
+		  	
+		// what happens when you click YES button
+		infoYES.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+
+				// toast, that the message has been sent!
+				
+				Context context = getApplicationContext();
+				SendToast newToast = new SendToast();
+				
+				newToast.createToast(context);
+            	
+            	finish(); // close the dialog box
+
+              	 
+              	 view =v;
+              	 
+              	 
+              	// thread that will delay delivery of the reply message 
+           		new Thread(new Task2()).start();  
+            	
+            	
+			}
+		});
+		
+		// what happens when you click NO button
+		infoNO.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+
+            	finish(); // close the dialog box
+            	
+            					
+			}
+		});
+		
+	}
+
+	
+	public void Notification(View view){
+		
+		Intent intent = new Intent(this, NegNotification.class);
+		int requestCode = 1;	
+		startActivityForResult(intent, requestCode);
+		
+	}
+	
+	
+	public void TopNotification(){
 		
 		Bitmap largeNotificationIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
 		
@@ -56,62 +120,39 @@ public class InformationActivity extends Activity {
 		negBuilder.setContentIntent(resultPendingIntent);
 		final NotificationManager negMNG = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		
-		Button infoYES = (Button) findViewById(R.id.info_yes);
-		Button infoNO = (Button) findViewById(R.id.info_no);
 		
-		  	
-		// what happens when you click YES button
-		infoYES.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-
-				// toast, that the message has been sent!
-				
-				Context context = getApplicationContext();
-				SendToast newToast = new SendToast();
-				
-				newToast.createToast(context);
-            	
-            	finish(); // close the dialog box
-            	
-            	MSGsentFromInfo = true;
-            	
-            	
-            	
-            	//start notification
-            	negMNG.notify(1, negBuilder.build());
-            	
-            	
-            	
-			}
-		});
-		
-		// what happens when you click NO button
-		infoNO.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-
-            	finish(); // close the dialog box
-            	
-            	MSGsentFromInfo=false;
-            	//pass this to the main activity!
-				
-			}
-		});
+    	
+     	 // negative notification because the user
+     	 // sent the email with the incorrect attachment
+     	 negMNG.notify(1, negBuilder.build());
 		
 	}
 	
-	public void PositiveResponseMSG(View view){
-		
-		
-		Intent intent = new Intent(this, PositiveResponse.class);
-		int requestCode = 2;	
-		startActivityForResult(intent, requestCode);
-	}
-
-	
+	// thread that delays delivery of the reply message
+	class Task2 implements Runnable {
+			    @Override
+		        public void run() {
+			           
+			         
+			                try {
+		                    Thread.sleep(4000);
+		                    
+			                } catch (InterruptedException e) {
+			                    e.printStackTrace();
+			                }
+			                
+			               handler.post(new Runnable() {
+			                @Override
+			                public void run() {
+			                	Notification(view);
+			                	TopNotification();
+			                	
+			                 }
+			               });
+			            
+			        }
+			 
+			    }
 
 	
 }

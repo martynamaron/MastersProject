@@ -52,7 +52,7 @@ public class AttachmentDialog extends DialogFragment{
         
         	
         
-        	   //.setIcon(drawable)  //sets the title icon
+        	   .setIcon(R.drawable.openfolder)  //sets the title icon
         	   
         	   	//setting the folder multi-check list
         	   .setMultiChoiceItems(R.array.attachments_array, null, new DialogInterface.OnMultiChoiceClickListener(){

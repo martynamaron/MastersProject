@@ -5,17 +5,6 @@
     tools:context="${packageName}.${activityClass}" >
 
     <Button
-        android:id="@+id/BTNobstruction_message_yes2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/BTN_why2"
-        android:layout_marginLeft="30dp"
-        android:text="@string/yes"
-        
-        />
-
-    <Button
         android:id="@+id/BTN_why2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,12 +26,24 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
+        android:id="@+id/BTNobstruction_message_yes2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/BTN_why2"
+        android:layout_marginLeft="49dp"
+        android:layout_marginTop="19dp"
+        android:layout_toRightOf="@+id/BTN_why2"
+        android:text="@string/yes" 
+        android:onClick="Notification"/>
+
+    <Button
         android:id="@+id/BTNobstruction_message_no2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/BTN_why2"
-        android:layout_marginRight="30dp"
+        android:layout_alignBaseline="@+id/BTNobstruction_message_yes2"
+        android:layout_alignBottom="@+id/BTNobstruction_message_yes2"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="51dp"
         android:text="@string/no" />
 
 </RelativeLayout>

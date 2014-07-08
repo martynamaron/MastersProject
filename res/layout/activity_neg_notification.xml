@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${packageName}.${activityClass}" >
+
+    <Button
+        android:id="@+id/NEGreadBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/NEGcancelBTN"
+        android:layout_alignBottom="@+id/NEGcancelBTN"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="41dp"
+        android:padding="15dp"
+        android:text="@string/view_message"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/NEGcancelBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="31dp"
+        android:layout_marginTop="33dp"
+        android:padding="15dp"
+        android:paddingBottom="25dp"
+        android:text="@string/cancel"
+        android:textSize="20sp" />
+
+</RelativeLayout>

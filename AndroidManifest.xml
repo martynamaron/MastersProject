@@ -37,11 +37,11 @@
         <activity
             android:name="com.example.obstructiveinterfaces.InformationActivity"
             android:label="@string/title_activity_information"
-            android:parentActivityName="com.example.obstructiveinterfaces.ObstructiveActivity"
+            android:parentActivityName="com.example.obstructiveinterfaces.MainActivity"
             android:theme="@android:style/Theme.Holo.Light.Dialog" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.obstructiveinterfaces.ObstructiveActivity" />
+                android:value="com.example.obstructiveinterfaces.MainActivity" />
         </activity>
         <activity
             android:name="com.example.obstructiveinterfaces.PositiveResponse"
@@ -59,8 +59,20 @@
         </activity>
         <activity
             android:name="com.example.obstructiveinterfaces.ObstructiveActivity2"
-            android:label="@string/title_activity_obstructive_activity2"
+            android:label="@string/send_click"
             android:theme="@android:style/Theme.Holo.Light.Dialog" >
+        </activity>
+        <activity
+            android:name="com.example.obstructiveinterfaces.PosNotification"
+            android:label="@string/new_message"
+            android:theme="@android:style/Theme.Holo.Light.Dialog" 
+            android:icon="@drawable/newmessage" >
+        </activity>
+        <activity
+            android:name="com.example.obstructiveinterfaces.NegNotification"
+            android:label="@string/new_message"
+            android:theme="@android:style/Theme.Holo.Light.Dialog"
+            android:icon="@drawable/newmessage" >
         </activity>
     </application>
 

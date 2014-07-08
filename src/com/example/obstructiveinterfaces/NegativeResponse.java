@@ -14,5 +14,7 @@ public class NegativeResponse extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_negative_response);
+		
+		
 	}
 }

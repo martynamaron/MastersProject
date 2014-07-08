@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import com.example.obstructiveinterfaces.ObstructiveActivity2.Task;
+import com.example.obstructiveinterfaces.ObstructiveActivity2.Task2;
+
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -14,6 +17,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.v4.app.DialogFragment;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,8 +35,8 @@ public class ObstructiveActivity extends Activity {
 private boolean  InfoViewed;
 private Button yesBTN, noBTN, whyBTN;
 private String PartNUMBER;
-
-
+private View view;
+private Handler handler;
 
 
 	@Override
@@ -48,18 +52,126 @@ private String PartNUMBER;
 		Bundle bundle = getIntent().getExtras();
 		PartNUMBER = bundle.getString("Participant Number");
 		
+		handler = new Handler();
+		
+		
+
+		
+
+		// if the user proceeds to send the message
+		yesBTN.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	
+            	// toast, that the message has been sent!
+    			
+    			Context context = getApplicationContext();
+    			SendToast newToast = new SendToast();
+    			
+    			newToast.createToast(context);
+            	
+            	
+    			finish(); // close the dialog box
+            	//System.exit(0); // close the app, with a delay!!!
+            	
+
+           	 
+           	 view =v;
+           	 
+           	 
+           	// thread that will delay delivery of the reply message 
+        		new Thread(new Task2()).start();         	 
+            	
+            }
+        });
+		
+		// if the message is not sent
+		noBTN.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	
+            	finish(); // close the dialog box
+            	
+            	// pass it to the main activity!
+            }
+        });
+
+		// clicking the WHY button
+		whyBTN.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	
+            	// starts a new activity in a form of a dialog box
+            	ActivityInfoBox(v);
+            	
+            	InfoViewed = true;
+            	saveInFile();
+            	
+            	finish();
+            }
+        });
+
+
+
+	}
+	
+	public void ActivityInfoBox(View view){
+		
+		
+		Intent intent = new Intent(this, InformationActivity.class);
+		int requestCode = 1;	
+		startActivityForResult(intent, requestCode);
+
+	}
+	
+	public void saveInFile(){
+		
+		String sFileName = "Results"+PartNUMBER+".txt";
+		try {
+			
+			File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+			
+		
+			File gpxfile = new File(root, sFileName);
+			FileWriter writer = new FileWriter(gpxfile, true);
+			writer.append("The information dialog was opened  \n");
+			writer.flush();
+	        writer.close();
+	        
+	        //debugging
+	        //Toast.makeText(this, "INFO Saved", Toast.LENGTH_SHORT).show();
+			
+		}
+		
+	    catch(IOException e)
+	    {
+	         e.printStackTrace();
+	    }
+
+		
+	}
+	
+	
+	public void Notification(View view){
+		
+		Intent intent = new Intent(this, NegNotification.class);
+		int requestCode = 1;	
+		startActivityForResult(intent, requestCode);
+		
+	}
+	
+	
+	public void TopNotification(){
+		
 		/** negative notification  
 		 * 
 		 * user receives negative feedback
 		 */
 		
-Bitmap largeNotificationIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+		Bitmap largeNotificationIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
 		
 		// setting the notification which tells the user about a message in reply to their own
 		// a reply from the supervisor
 		
-		 final NotificationCompat.Builder negBuilder = new NotificationCompat.Builder(this)
-	    .setSmallIcon(R.drawable.notification)
+		final NotificationCompat.Builder negBuilder = new NotificationCompat.Builder(this)
+		.setSmallIcon(R.drawable.notification)
 	    .setLargeIcon(largeNotificationIcon)
 	    .setContentTitle("1 new message")
 	    .setContentText("From: timothy.storer@glasgow.ac.uk")
@@ -84,96 +196,44 @@ Bitmap largeNotificationIcon = BitmapFactory.decodeResource(getResources(), R.dr
 		negBuilder.setContentIntent(resultPendingIntent);
 		final NotificationManager negMNG = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		
+    	
+    	 // negative notification because the user
+    	 // sent the email with the incorrect attachment
+    	 negMNG.notify(1, negBuilder.build());
+		
 		/** end of
 		 * negative notification
 		 */
-
-		
-
-		// if the user proceeds to send the message
-		yesBTN.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            	
-            	// toast, that the message has been sent!
-    			
-    			Context context = getApplicationContext();
-    			SendToast newToast = new SendToast();
-    			
-    			newToast.createToast(context);
-            	
-            	
-    			finish(); // close the dialog box
-            	//System.exit(0); // close the app, with a delay!!!
-            	
-            	
-            	 
-            	 // negative notification because the user
-            	 // sent the email with the incorrect attachment
-            	 negMNG.notify(1, negBuilder.build());
-            }
-        });
-		
-		// if the message is not sent
-		noBTN.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            	
-            	finish(); // close the dialog box
-            	
-            	// pass it to the main activity!
-            }
-        });
-
-		// clicking the WHY button
-		whyBTN.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            	
-            	// starts a new activity in a form of a dialog box
-            	ActivityInfoBox(v);
-            	
-            	InfoViewed = true;
-            	
-            	
-            	saveInFile();
-            	
-            	finish();
-            }
-        });
-
-
-	}
-	
-	public void ActivityInfoBox(View view){
-		
-		
-		Intent intent = new Intent(this, InformationActivity.class);
-		int requestCode = 1;	
-		startActivityForResult(intent, requestCode);
-
-	}
-	
-	public void saveInFile(){
-		
-		String sFileName = "Results"+PartNUMBER+".txt";
-		try {
-			
-			File root = new File(Environment.getExternalStorageDirectory(), "Notes");
-			File gpxfile = new File(root, sFileName);
-			FileWriter writer = new FileWriter(gpxfile);
-	        writer.append("The information dialog has been opened");
-	        writer.flush();
-	        writer.close();
-	        Toast.makeText(this, "INFO Saved", Toast.LENGTH_SHORT).show();
-			
-		}
-		
-	    catch(IOException e)
-	    {
-	         e.printStackTrace();
-	    }
-
 		
 	}
 	
+	
+	// thread that delays delivery of the reply message
+	class Task2 implements Runnable {
+			    @Override
+		        public void run() {
+			           
+			         
+			                try {
+		                    Thread.sleep(4000);
+		                    
+			                } catch (InterruptedException e) {
+			                    e.printStackTrace();
+			                }
+			                
+			               handler.post(new Runnable() {
+			                @Override
+			                public void run() {
+
+			                	Notification(view);
+			                	TopNotification();
+			                	
+			                 }
+			               });
+			            
+			        }
+			 
+			    }
 
 
 }

@@ -37,17 +37,14 @@
         
     </EditText>
         
-
     <EditText
         android:id="@+id/A_input_partnum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/A_part_no"
         android:layout_alignLeft="@+id/A_input_obsr"
-        android:ems="3"
+        android:ems="4"
         android:textSize="12sp" />
-
-      
 
     <Button
         android:id="@+id/initial_continueBTN"

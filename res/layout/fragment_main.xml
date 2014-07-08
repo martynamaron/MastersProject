@@ -46,7 +46,10 @@
         android:ems="25"
         android:hint="@string/btn_eaddress"
         android:inputType="textEmailAddress"
-        android:textSize="18sp" />
+        android:textSize="18sp" >
+        
+                <requestFocus />
+    </EditText>
 
     <EditText
         android:id="@+id/email_subject"
@@ -72,10 +75,8 @@
         android:ems="15"
         android:gravity="top"
         android:inputType="textMultiLine"
-        android:minLines="19" >
+        android:minLines="19" />
 
-        <requestFocus />
-    </EditText>
 
     <Button
         android:id="@+id/btn_send"
@@ -145,7 +146,8 @@
         android:layout_above="@+id/Attachment"
         android:layout_alignRight="@+id/btn_send"
         android:layout_marginRight="13dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/textView2"
@@ -153,6 +155,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/ReattachingFile"
         android:layout_alignRight="@+id/textView1"
-        android:text="TextView" />
+        android:text="TextView"
+        android:visibility="invisible" />
 
 </RelativeLayout>

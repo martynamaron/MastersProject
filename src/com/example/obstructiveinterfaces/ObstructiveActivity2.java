@@ -1,5 +1,9 @@
 package com.example.obstructiveinterfaces;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,8 +13,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +26,8 @@ import android.widget.Toast;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NotificationCompat;
-;
+import android.support.v7.app.ActionBarActivity;
+
 
 public class ObstructiveActivity2 extends Activity {
 	
@@ -28,8 +35,8 @@ private boolean  InfoViewed;
 
 private Handler handler;
 private Button yesBTN, noBTN, whyBTN;
-
-
+private String PartNUMBER;
+private View view;
 
 
 	@Override
@@ -44,8 +51,85 @@ private Button yesBTN, noBTN, whyBTN;
 		// button initially set to false
 		yesBTN.setEnabled(false);
 		
+		//read the participant number
+		Bundle bundle = getIntent().getExtras();
+		PartNUMBER = bundle.getString("Participant Number");
+		
 		handler = new Handler();
 		
+		
+
+
+		
+
+		// if the user proceeds to send the message
+		yesBTN.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	
+            	// toast, that the message has been sent!
+    			
+    			Context context = getApplicationContext();
+    			SendToast newToast = new SendToast();
+    			
+    			newToast.createToast(context);
+            	
+            	
+    			finish(); // close the dialog box
+            	//System.exit(0); // close the app, with a delay!!!
+            	
+
+            	 
+            	 view =v;
+            	 
+            	 
+            	// thread that will delay delivery of the reply message 
+         		new Thread(new Task2()).start();
+            	 
+            	
+            }
+        });
+		
+		// if the message is not sent
+		noBTN.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	
+            	finish(); // close the dialog box
+            	
+            	// pass it to the main activity!
+            }
+        });
+
+		// clicking the WHY button
+		whyBTN.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	
+            	// starts a new activity in a form of a dialog box
+            	ActivityInfoBox(v);
+            	
+            	InfoViewed = true;
+            	
+            	saveInFile();
+            	
+            	finish();
+            }
+        });
+		
+		// starts a thread which enables the YES button after 5 seconds
+		new Thread(new Task()).start();
+
+	}
+	
+	public void ActivityInfoBox(View view){
+		
+		
+		Intent intent = new Intent(this, InformationActivity.class);
+		int requestCode = 1;	
+		startActivityForResult(intent, requestCode);
+
+	}
+	
+	
+	public void TopNotification(){
 		
 		/** negative notification  
 		 * 
@@ -83,76 +167,87 @@ Bitmap largeNotificationIcon = BitmapFactory.decodeResource(getResources(), R.dr
 		negBuilder.setContentIntent(resultPendingIntent);
 		final NotificationManager negMNG = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		
+    	
+   	 
+   	 // negative notification because the user
+   	 // sent the email with the incorrect attachment
+   	 negMNG.notify(1, negBuilder.build());
+		
 		/** end of
 		 * negative notification
 		 */
-
-		
-
-		// if the user proceeds to send the message
-		yesBTN.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            	
-            	// toast, that the message has been sent!
-    			
-    			Context context = getApplicationContext();
-    			SendToast newToast = new SendToast();
-    			
-    			newToast.createToast(context);
-            	
-            	
-    			finish(); // close the dialog box
-            	//System.exit(0); // close the app, with a delay!!!
-            	
-            	
-            	 
-            	 // negative notification because the user
-            	 // sent the email with the incorrect attachment
-            	 negMNG.notify(1, negBuilder.build());
-            }
-        });
-		
-		// if the message is not sent
-		noBTN.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            	
-            	finish(); // close the dialog box
-            	
-            	// pass it to the main activity!
-            }
-        });
-
-		// clicking the WHY button
-		whyBTN.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            	
-            	// starts a new activity in a form of a dialog box
-            	ActivityInfoBox(v);
-            	
-            	InfoViewed = true;
-            	
-            	finish();
-            }
-        });
-		
-		// starts a thread which enables the YES button after 5 seconds
-		new Thread(new Task()).start();
-
 	}
 	
-	public void ActivityInfoBox(View view){
+
+	
+	public void saveInFile(){
 		
+		String sFileName = "Results"+PartNUMBER+".txt";
+		try {
+			
+			File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+			
 		
-		Intent intent = new Intent(this, InformationActivity.class);
+			File gpxfile = new File(root, sFileName);
+			FileWriter writer = new FileWriter(gpxfile, true);
+			writer.append("The information dialog was opened  \n");
+			writer.flush();
+	        writer.close();
+
+	        //debugging
+	        //Toast.makeText(this, "INFO Saved", Toast.LENGTH_SHORT).show();
+			
+		}
+		
+	    catch(IOException e)
+	    {
+	         e.printStackTrace();
+	    }
+
+		
+	}
+	
+	public void Notification(View view){
+		
+		Intent intent = new Intent(this, NegNotification.class);
 		int requestCode = 1;	
 		startActivityForResult(intent, requestCode);
-
+		
 	}
 	
 	
 	// the delay thread defined an vibration
 
 	class Task implements Runnable {
+			    @Override
+		        public void run() {
+			           
+			         
+			                try {
+		                    Thread.sleep(5000);
+		                    
+			                } catch (InterruptedException e) {
+			                    e.printStackTrace();
+			                }
+			                
+			               handler.post(new Runnable() {
+			                @Override
+			                public void run() {
+			                	yesBTN.setEnabled(true);
+			                	
+			                	
+			                 }
+			               });
+			            
+			        }
+			 
+			    }
+
+	// end of delay thread
+	
+	
+	// thread that delays delivery of the reply message
+	class Task2 implements Runnable {
 			    @Override
 		        public void run() {
 			           
@@ -167,7 +262,8 @@ Bitmap largeNotificationIcon = BitmapFactory.decodeResource(getResources(), R.dr
 			               handler.post(new Runnable() {
 			                @Override
 			                public void run() {
-			                	yesBTN.setEnabled(true);
+			                	Notification(view);
+			                	TopNotification();
 			                	
 			                 }
 			               });
@@ -176,7 +272,6 @@ Bitmap largeNotificationIcon = BitmapFactory.decodeResource(getResources(), R.dr
 			 
 			    }
 
-	// end of delay thread
 
 }
 

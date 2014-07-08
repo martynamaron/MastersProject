@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import com.example.obstructiveinterfaces.ObstructiveActivity.Task2;
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -24,6 +26,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -45,11 +48,13 @@ ReattachingDialog.ReattachingDialogListener {
 	int obstr;
 	String ParticipantNO="";
 	String returnedResult="";
+	String sFileName = "";
+	String ParticipantMetadata, reattachedSTRING;
 	Vibrator v;
-	int i;
 	final static int STATIC_INTEGER_VALUE = 1;
 	protected static final String PUBLIC_STATIC_STRING_IDENTIFIER = "passing the participant number";
-	
+	private Handler handler;
+	private View view;
 	boolean firstAttach, reattached, infoViewed;
 	
 	
@@ -59,7 +64,7 @@ ReattachingDialog.ReattachingDialogListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		
+		handler = new Handler();
 		
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
@@ -99,8 +104,6 @@ ReattachingDialog.ReattachingDialogListener {
 		public PlaceholderFragment() {
 			
 		}
-
-
 		
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -110,10 +113,8 @@ ReattachingDialog.ReattachingDialogListener {
 						
 			return rootView;
 			
-			
-		}
-		
-		
+			}
+				
 	}
 	
 	// dialog to type in the participant number and obstruction type
@@ -154,7 +155,9 @@ ReattachingDialog.ReattachingDialogListener {
 	    	  tv2.setText(ParticipantNO);
 	    	  
 	      }
+	      
 	      break;
+	      
 	    } 
 	  }
 	}
@@ -188,10 +191,9 @@ ReattachingDialog.ReattachingDialogListener {
 	}
 
 		
-		
 	}
 	
-	
+
 	// AttachmentDialog dialog box
 	// making the attachments visible
 	
@@ -199,7 +201,7 @@ ReattachingDialog.ReattachingDialogListener {
 	    public void onAttachmentPositiveClick(DialogFragment dialog) {
 	        // User touched the dialog's positive button
 		  
-		  createFile();
+		  
 
 		  TextView attachment = (TextView) findViewById(R.id.Attachment);
 		  attachment.setVisibility(0);
@@ -234,6 +236,8 @@ ReattachingDialog.ReattachingDialogListener {
 		REattachment.setVisibility(0);
 	
 		reattached = true;
+		
+		
 			
 		}
 		
@@ -250,28 +254,29 @@ ReattachingDialog.ReattachingDialogListener {
 		 * New Activity! in a form of a dialog 
 		 * WORKS ! */
 		
-	public void ActivitySendMsg(View view){
+	public void ActivitySendMsg(View view2){
 		
 		// show the obstructive window only if the attachment is incorrect!
 		// when the attachment has been changed - do nothing, just send
 
-		
+		reattachedSTRING="The wrong attachment was sent \n";
 		
 		if ((!reattached) && obstructionType=='1')
 		{
-						
+			createFile(reattachedSTRING);		
 			//if obstruction type = 1, display the simple version
 				Intent intent = new Intent(this, ObstructiveActivity.class);
 				
 				
 				//send the participant number with the intent!
 				intent.putExtra("Participant Number", ParticipantNO);
-				
 				startActivity(intent);
 				
 			}
 						
 			else if (!reattached && obstructionType=='2'){
+				
+				createFile(reattachedSTRING);
 				//if obstruction type = 2, display the window with the time delay	
 				
 				Intent intent = new Intent(this, ObstructiveActivity2.class);
@@ -282,23 +287,31 @@ ReattachingDialog.ReattachingDialogListener {
 				
 			}
 						
-				
 			else if (!reattached && obstructionType=='3'){
+				
+				createFile(reattachedSTRING);
+				
 			// if obstruction type = 3, display the window with the delay and vibration			
 				Intent intent = new Intent(this, ObstructiveActivity2.class);
 				
-						startActivity(intent);
-						
-						v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-						v.vibrate(4000);
+				//send the participant number with the intent!
+				intent.putExtra("Participant Number", ParticipantNO);
+				startActivity(intent);
+					
+				// make it vibrate!
+				v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+				v.vibrate(4000);
 			}
 
-  
-		
-		
 		
 		else // reattached = true
-		{
+			
+			{
+			
+			reattachedSTRING = "The  attachement has been changed and the right one sent \n";
+			createFile(reattachedSTRING);
+			
+			
 			// toast, that the message has been sent!
 			
 			Context context = getApplicationContext();
@@ -306,98 +319,141 @@ ReattachingDialog.ReattachingDialogListener {
 			
 			newToast.createToast(context);
 			
+
 			
-        	// notification, that the message has been sent!
-        	
-			Bitmap largeNotificationIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+			/** end of notification code */
+
 			
-			// setting the notification which tells the user about a message in reply to their own
-			// a reply from the supervisor
+			view = view2;
 			
-			 final NotificationCompat.Builder posBuilder = new NotificationCompat.Builder(this)
-		    .setSmallIcon(R.drawable.notification)
-		    .setLargeIcon(largeNotificationIcon)
-		    .setContentTitle("1 new message")
-		    .setContentText("From: timothy.storer@glasgow.ac.uk")
-			.setTicker("New Message");
+           	// thread that will delay delivery of the reply message 
+        		new Thread(new Task2()).start();   
 			
-			// Creates an explicit intent for an Activity in the app
-			Intent resultIntent = new Intent(this, PositiveResponse.class);
-			// The stack builder object will contain an artificial back stack for the
-			// started Activity.
-			// This ensures that navigating backward from the Activity leads out of
-			// your application to the Home screen.
-			TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-			// Adds the back stack for the Intent (but not the Intent itself)
-			stackBuilder.addParentStack(MainActivity.class);
-			// Adds the Intent that starts the Activity to the top of the stack
-			stackBuilder.addNextIntent(resultIntent);
-			PendingIntent resultPendingIntent =
-			        stackBuilder.getPendingIntent(
-			            0,
-			            PendingIntent.FLAG_UPDATE_CURRENT
-			        );
-			posBuilder.setContentIntent(resultPendingIntent);
-			final NotificationManager posMNG = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-			
-			posMNG.notify(1, posBuilder.build());
-		
 		}
+		
+
+		
+	}
+
+	
+	
+	public void TopNOtification () {
+		
+		
+    	/** notification code*/
+    	// notification, that the message has been sent!
+    	
+		Bitmap largeNotificationIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+		
+		// setting the notification which tells the user about a message in reply to their own
+		// a reply from the supervisor
+		
+		 final NotificationCompat.Builder posBuilder = new NotificationCompat.Builder(this)
+	    .setSmallIcon(R.drawable.notification)
+	    .setLargeIcon(largeNotificationIcon)
+	    .setContentTitle("1 new message")
+	    .setContentText("From: timothy.storer@glasgow.ac.uk")
+		.setTicker("New Message");
+		
+		// Creates an explicit intent for an Activity in the app
+		Intent resultIntent = new Intent(this, PositiveResponse.class);
+		// The stack builder object will contain an artificial back stack for the
+		// started Activity.
+		// This ensures that navigating backward from the Activity leads out of
+		// your application to the Home screen.
+		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+		// Adds the back stack for the Intent (but not the Intent itself)
+		stackBuilder.addParentStack(MainActivity.class);
+		// Adds the Intent that starts the Activity to the top of the stack
+		stackBuilder.addNextIntent(resultIntent);
+		PendingIntent resultPendingIntent =
+		        stackBuilder.getPendingIntent(
+		            0,
+		            PendingIntent.FLAG_UPDATE_CURRENT
+		        );
+		posBuilder.setContentIntent(resultPendingIntent);
+		final NotificationManager posMNG = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		
+		posMNG.notify(1, posBuilder.build());
 		
 	}
 	
+	
+	public void Notification(View view){
+		
+		Intent intent = new Intent(this, PosNotification.class);
+		int requestCode = 1;	
+		startActivityForResult(intent, requestCode);
+		
+	}
+	
+	
+	// thread that delays delivery of the reply message
+	class Task2 implements Runnable {
+			    @Override
+		        public void run() {
+			           
+			         
+			                try {
+		                    Thread.sleep(4000);
+		                    
+			                } catch (InterruptedException e) {
+			                    e.printStackTrace();
+			                }
+			                
+			               handler.post(new Runnable() {
+			                @Override
+			                public void run() {
+
+			                				                	
+			                	Notification(view);
+			                	TopNOtification();
+			                	
+			                 }
+			               });
+			            
+			        }
+			 
+			    }
+	
 	// creates a test file and saves it in the 'Notes' directory 
 	// with the participant's number as a title
-	public void createFile() {
-		
-		
-		String sFileName = "Results"+ParticipantNO+".txt";
-		String ParticipantResults;
-		String reattachedSTRING;
-		
-		if (reattached){
-			reattachedSTRING = "The attachement was changed and correct message sent";
-		}
-		else{
-			reattachedSTRING= "The wrong attachment has been sent";
-		}
+	public void createFile(String append) {
+
+				
 		
 		// participant number
 		// obstruction type
 		 
-		ParticipantResults = "Participant Number: " +ParticipantNO+"\n" +
+		ParticipantMetadata = "Participant Number: " +ParticipantNO+"\n" +
 				"Obstruction Type: " +obstructionType+"\n"+
-				reattachedSTRING 
-				;
+				append;
 		
-		//proceeded  to send : true
-		// message sent - negative feedback
-		
-		//information box clicked - true
+		sFileName = "Results"+ParticipantNO+".txt";
 		
 		// creating the file
 		    try
 		    {
 		        File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+
 		        if (!root.exists()) {
 		            root.mkdirs();
-		        }
+		        }		        
+		        
 		        File gpxfile = new File(root, sFileName);
-		        FileWriter writer = new FileWriter(gpxfile);
-		        writer.append(ParticipantResults);
+		        FileWriter writer = new FileWriter(gpxfile, true);
+		        writer.append(ParticipantMetadata);
 		        writer.flush();
 		        writer.close();
-		        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+		        
+		        //debugging
+		        //Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
 		    }
 		    catch(IOException e)
 		    {
 		         e.printStackTrace();
 		    }
-		   }  
-
-
-
-
-
+	}  
+ 
 
 }

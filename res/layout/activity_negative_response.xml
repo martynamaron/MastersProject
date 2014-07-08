@@ -21,18 +21,6 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/neg_res_supervisor_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/neg_res_from"
-        android:layout_marginLeft="36dp"
-        android:layout_toRightOf="@+id/neg_res_from"
-        android:ems="13"
-        android:text="@string/supervisor_email"
-        android:textColor="#000"
-        android:textSize="22sp" />
-
-    <TextView
         android:id="@+id/neg_res_from"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,6 +39,18 @@
         android:layout_below="@+id/neg_res_supervisor_email"
         android:layout_marginTop="35dp"
         android:text="@string/res_subjectmsg"
+        android:textColor="#000"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/neg_res_supervisor_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/neg_res_from"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/neg_res_from"
+        android:ems="13"
+        android:text="@string/supervisor_email"
         android:textColor="#000"
         android:textSize="22sp" />
 

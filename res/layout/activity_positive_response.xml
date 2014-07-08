@@ -38,6 +38,7 @@
         android:maxEms="25"
         android:minEms="22"
         android:minLines="19"
+        android:padding="5dp"
         android:text="@string/pos_res_emailBody"
         android:textSize="20sp" />
 
@@ -46,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/pos_res_from"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="13dp"
         android:layout_toRightOf="@+id/pos_res_from"
         android:ems="13"
         android:text="@string/supervisor_email"
