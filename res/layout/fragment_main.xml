@@ -77,7 +77,6 @@
         android:inputType="textMultiLine"
         android:minLines="19" />
 
-
     <Button
         android:id="@+id/btn_send"
         android:layout_width="120dp"
@@ -123,7 +122,7 @@
         android:layout_alignBaseline="@+id/ReattachingFile"
         android:layout_alignBottom="@+id/ReattachingFile"
         android:layout_alignLeft="@+id/ReattachingFile"
-        android:text="@string/attachment"
+        android:text=" "
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:visibility="invisible" />
 

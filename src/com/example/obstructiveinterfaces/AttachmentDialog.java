@@ -6,9 +6,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
@@ -17,7 +14,7 @@ public class AttachmentDialog extends DialogFragment{
 	
 	
 	 public interface AttachmentDialogListener {
-	        public void onAttachmentPositiveClick(DialogFragment dialog);
+	        public void onAttachmentPositiveClick(ArrayList<Integer> arrayList);
 	        public void onAttachmentNegativeClick(DialogFragment dialog);
 	    }
 
@@ -43,12 +40,13 @@ public class AttachmentDialog extends DialogFragment{
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
 		
-		final ArrayList  mSelectedItems = new ArrayList();  // Where we track the selected items
-
+		
+		final ArrayList  AttachedItems = new ArrayList();  // Where we track the selected items
+		String choice ="";
 		
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
        // .setMessage("Message")
-        builder.setTitle("Dissertations > UnderGrad")
+        builder.setTitle("Dissertations > Postgraduate")
         
         	
         
@@ -57,16 +55,19 @@ public class AttachmentDialog extends DialogFragment{
         	   	//setting the folder multi-check list
         	   .setMultiChoiceItems(R.array.attachments_array, null, new DialogInterface.OnMultiChoiceClickListener(){
 
-        		  
+        		 
+        		   
+        		// template code from Android Developers   
 				@Override
 				public void onClick(DialogInterface dialog, int which,
 						boolean isChecked) {
 					   if (isChecked) {
 	                       // If the user checked the item, add it to the selected items
-	                       mSelectedItems.add(which);
-	                   } else if (mSelectedItems.contains(which)) {
+						   AttachedItems.add(which);
+						   
+	                   } else if (AttachedItems.contains(which)) {
 	                       // Else, if the item is already in the array, remove it 
-	                       mSelectedItems.remove(Integer.valueOf(which));
+	                	   AttachedItems.remove(Integer.valueOf(which));
 	                   }
 
 					
@@ -78,7 +79,7 @@ public class AttachmentDialog extends DialogFragment{
         	   })
                .setPositiveButton("Attach File", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
-                	   mListener.onAttachmentPositiveClick(AttachmentDialog.this);
+                	   mListener.onAttachmentPositiveClick(AttachedItems);
 
                    }
                })

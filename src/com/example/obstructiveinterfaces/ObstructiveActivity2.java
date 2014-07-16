@@ -15,18 +15,9 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.ActionBarActivity;
 
 
 public class ObstructiveActivity2 extends Activity {
@@ -253,7 +244,7 @@ Bitmap largeNotificationIcon = BitmapFactory.decodeResource(getResources(), R.dr
 			           
 			         
 			                try {
-		                    Thread.sleep(4000);
+		                    Thread.sleep(5000);
 		                    
 			                } catch (InterruptedException e) {
 			                    e.printStackTrace();

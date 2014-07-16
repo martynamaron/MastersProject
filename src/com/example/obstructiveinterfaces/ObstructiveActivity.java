@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import com.example.obstructiveinterfaces.ObstructiveActivity2.Task;
-import com.example.obstructiveinterfaces.ObstructiveActivity2.Task2;
 
 import android.app.Activity;
 import android.app.NotificationManager;
@@ -18,15 +16,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.v4.app.DialogFragment;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NotificationCompat;
 ;
 
@@ -215,7 +206,7 @@ private Handler handler;
 			           
 			         
 			                try {
-		                    Thread.sleep(4000);
+		                    Thread.sleep(5000);
 		                    
 			                } catch (InterruptedException e) {
 			                    e.printStackTrace();

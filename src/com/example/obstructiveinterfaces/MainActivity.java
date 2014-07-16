@@ -6,22 +6,20 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import com.example.obstructiveinterfaces.ObstructiveActivity.Task2;
+
+import java.util.ArrayList;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
-import android.text.Editable;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -34,10 +32,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 public class MainActivity extends ActionBarActivity implements AttachmentDialog.AttachmentDialogListener, 
 ReattachingDialog.ReattachingDialogListener {
@@ -56,7 +54,7 @@ ReattachingDialog.ReattachingDialogListener {
 	private Handler handler;
 	private View view;
 	boolean firstAttach, reattached, infoViewed;
-	
+	private String [] attachments;
 	
 	
 	@Override
@@ -198,12 +196,29 @@ ReattachingDialog.ReattachingDialogListener {
 	// making the attachments visible
 	
 	  @Override
-	    public void onAttachmentPositiveClick(DialogFragment dialog) {
+	    public void onAttachmentPositiveClick(ArrayList<Integer> arrayList) {
 	        // User touched the dialog's positive button
 		  
+		  Resources res = getResources();
+		  attachments = res.getStringArray(R.array.attachments_array);
 		  
+		  StringBuilder sb = new StringBuilder();
+		  
+		  String choice="";
+		  
+		  if (arrayList.size() != 0) {
+			  
+			  for (int i=0; i<arrayList.size(); i++){
+				  choice = attachments[arrayList.get(i)];
+				  sb = sb.append(" "+choice);
+			  }
+			  
+			  Toast.makeText(this, "you have selected: "+sb.toString(), Toast.LENGTH_LONG).show();
+			  
+		  }
 
 		  TextView attachment = (TextView) findViewById(R.id.Attachment);
+		  attachment.setText(choice);
 		  attachment.setVisibility(0);
 		  
 		  ImageView clippy = (ImageView) findViewById(R.id.AttachmentClip);
@@ -319,10 +334,6 @@ ReattachingDialog.ReattachingDialogListener {
 			
 			newToast.createToast(context);
 			
-
-			
-			/** end of notification code */
-
 			
 			view = view2;
 			
@@ -375,6 +386,8 @@ ReattachingDialog.ReattachingDialogListener {
 		final NotificationManager posMNG = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		
 		posMNG.notify(1, posBuilder.build());
+
+		/** end of notification code */
 		
 	}
 	
@@ -395,7 +408,7 @@ ReattachingDialog.ReattachingDialogListener {
 			           
 			         
 			                try {
-		                    Thread.sleep(4000);
+		                    Thread.sleep(5000);
 		                    
 			                } catch (InterruptedException e) {
 			                    e.printStackTrace();

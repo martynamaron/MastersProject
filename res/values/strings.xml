@@ -15,7 +15,7 @@
     <string name="send_click">Send message?</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
-    <string name="info_dialog_msg">The subject of your email reads: \'Latest dissertation update\', 
+    <string name="info_dialog_msg">The subject of your email reads: \"Latest dissertation update\", 
         but you have attached a file last updated in December 2012.</string>
     <string name="are_you_sure"> Are you sure you want to proceed?</string>
     <string name="title_activity_information">More info</string>
