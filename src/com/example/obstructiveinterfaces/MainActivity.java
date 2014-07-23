@@ -202,6 +202,8 @@ ReattachingDialog.ReattachingDialogListener {
 		//d.setContentView(tv);
 		dialogReattach.show(getSupportFragmentManager(), "REattach box");
 		
+		  reattached = true;
+		
 	}
 
 		
@@ -217,7 +219,7 @@ ReattachingDialog.ReattachingDialogListener {
 		  
 		  theChosenOne = chosenNUM;
 
-		  
+					  
 		  Resources res = getResources();
 		  attachments = res.getStringArray(R.array.attachments_array);
 		  
@@ -235,7 +237,7 @@ ReattachingDialog.ReattachingDialogListener {
 				  
 			  }
 			  
-			  Toast.makeText(this, "You have selected: "+sb.toString() +theChosenOne, Toast.LENGTH_LONG).show();
+			  Toast.makeText(this, "You have selected: "+sb.toString(), Toast.LENGTH_LONG).show();
 			  
 		  }
 

@@ -74,9 +74,11 @@ public class AttachmentDialog extends DialogFragment{
        			
        			if (Attaching==0 || Attaching==3){
        				checked[1]=true;
+       				AttachedItems.add(1);
        			}
        			else if(Attaching >0 && Attaching <3){
        				checked[0]=true;
+       				AttachedItems.add(0);
        			}
        			
        			
