@@ -45,5 +45,10 @@
     <string name="view_message">Read message</string>
     <string name="cancel">Cancel</string>
     <string name="title_activity_neg_notification">NegNotification</string>
+    
+    <string name="item1">Dissertation_Draft.pdf</string>
+    <string name="item2">dissertation draft.docx</string>
+    <string name="item3">diss_draft2.doc</string>
+    <string name="item4">Tim_dissertation draft.docx</string>
 
 </resources>

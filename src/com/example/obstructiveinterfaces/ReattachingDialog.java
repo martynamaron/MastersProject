@@ -40,6 +40,8 @@ public class ReattachingDialog extends DialogFragment{
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
 		
+
+		
 		final ArrayList  mSelectedItems = new ArrayList();  // Where we track the selected items
 
 		

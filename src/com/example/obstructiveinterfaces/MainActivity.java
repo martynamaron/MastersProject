@@ -32,6 +32,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +56,7 @@ ReattachingDialog.ReattachingDialogListener {
 	private View view;
 	boolean firstAttach, reattached, infoViewed;
 	private String [] attachments;
+	private int theChosenOne;
 	
 	
 	@Override
@@ -170,6 +172,13 @@ ReattachingDialog.ReattachingDialogListener {
 	if (!firstAttach) {
 		
 		DialogFragment attachDialog = new AttachmentDialog();
+		
+		
+	    // Supply num input as an argument.
+	    Bundle args = new Bundle();
+	    args.putInt("Reattaching", 20);
+	    attachDialog.setArguments(args);
+		
 		//d.setTitle("Dialog Test");
 		TextView tv = new TextView(this);
 		tv.setText("Success");
@@ -180,7 +189,14 @@ ReattachingDialog.ReattachingDialogListener {
 	
 	else {
 		
-		DialogFragment dialogReattach = new ReattachingDialog();
+		DialogFragment dialogReattach = new AttachmentDialog();
+		
+		
+	    // Supply num input as an argument.
+	    Bundle args = new Bundle();
+	    args.putInt("Reattaching", theChosenOne);
+	    dialogReattach.setArguments(args);
+		
 		TextView tv = new TextView(this);
 		tv.setText("Success");
 		//d.setContentView(tv);
@@ -196,8 +212,11 @@ ReattachingDialog.ReattachingDialogListener {
 	// making the attachments visible
 	
 	  @Override
-	    public void onAttachmentPositiveClick(ArrayList<Integer> arrayList) {
+	    public void onAttachmentPositiveClick(ArrayList <Integer>arrayList, int chosenNUM) {
 	        // User touched the dialog's positive button
+		  
+		  theChosenOne = chosenNUM;
+
 		  
 		  Resources res = getResources();
 		  attachments = res.getStringArray(R.array.attachments_array);
@@ -211,9 +230,12 @@ ReattachingDialog.ReattachingDialogListener {
 			  for (int i=0; i<arrayList.size(); i++){
 				  choice = attachments[arrayList.get(i)];
 				  sb = sb.append(" "+choice);
+				  
+				 
+				  
 			  }
 			  
-			  Toast.makeText(this, "you have selected: "+sb.toString(), Toast.LENGTH_LONG).show();
+			  Toast.makeText(this, "You have selected: "+sb.toString() +theChosenOne, Toast.LENGTH_LONG).show();
 			  
 		  }
 
